@@ -1,8 +1,26 @@
 {% extends 'base.html.twig' %}
+{# categories \AppBundle\Entity\Category[] #}
 
 {% block body %}
-    {# categories \AppBundle\Entity\Category[] #}
+    <div class="card mb-4">
+        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+        <div class="card-body">
+            <h2 class="card-title">Titre de mon futur article </h2>
+            <p class="card-text">A vous de mettre les infos des articles ici :D</p>
+            <a href="#" class="btn btn-primary">Read More &rarr;</a>
+        </div>
+        <div class="card-footer text-muted">
+            Posted on January 1, 2017 by
+            <a href="#">Start Bootstrap</a>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block categories_widget %}
     {% for category in categories %}
-        <div>{{ category.name }}</div>
+        <div class="col-lg-6">
+            <a>{{ category.name }}</a>
+        </div>
     {% endfor %}
 {% endblock %}
