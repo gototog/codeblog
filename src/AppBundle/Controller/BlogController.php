@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Article;
 use AppBundle\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,8 +19,14 @@ class BlogController extends Controller
             ->getRepository(Category::class)
             ->findAll()
         ;
+        $article = $this
+            ->getDoctrine()
+            ->getRepository(Article::class)
+            ->getLastArticle();
+
         return $this->render('blog/homepage.html.twig', [
-            'categories' => $categories
+            'categories' => $categories,
+            'article' => $article,
         ]);
     }
 }

@@ -22,6 +22,10 @@ class Category
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article", mappedBy="category")
+     */
+    private $articles;
 
     /**
      * @return int
@@ -49,6 +53,19 @@ class Category
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Article[]
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
     }
 }
 
