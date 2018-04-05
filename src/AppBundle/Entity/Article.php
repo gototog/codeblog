@@ -44,6 +44,16 @@ class Article
     private $category;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $image;
+
+    /**
+     * Contiendra l'objet image du formulaire
+     */
+    private $imageFile;
+
+    /**
      * @return int
      */
     public function getId()
@@ -119,6 +129,26 @@ class Article
     public function setCategory(Category $category)
     {
         $this->category = $category;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
     }
 }
 

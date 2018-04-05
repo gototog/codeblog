@@ -13,6 +13,7 @@ class HelloController extends Controller
      */
     public function helloNameAction(Request $request, $name = "world")
     {
+        //return $this->render('hello/hello_name.html.twig', array(
         return $this->render('hello/hello_name.html.twig', array(
             'name' => $name,
         ));

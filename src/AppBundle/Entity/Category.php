@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="category")
@@ -18,6 +19,8 @@ class Category
     private $id;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(min="2",max="255")
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -66,6 +69,11 @@ class Category
     public function setArticles($articles)
     {
         $this->articles = $articles;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
 
