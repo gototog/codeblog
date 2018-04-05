@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -38,6 +39,8 @@ class ArticleController extends Controller
      *
      * @Route("/new", name="article_new")
      * @Method({"GET", "POST"})
+     *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newAction(Request $request)
     {
@@ -91,6 +94,7 @@ class ArticleController extends Controller
     /**
      * Displays a form to edit an existing article entity.
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="article_edit")
      * @Method({"GET", "POST"})
      */
@@ -131,6 +135,7 @@ class ArticleController extends Controller
     /**
      * Deletes a article entity.
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="article_delete")
      * @Method("DELETE")
      */
