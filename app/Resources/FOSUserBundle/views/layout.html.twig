@@ -1,0 +1,6 @@
+{% extends "base.html.twig" %}
+
+{# Le block fos_user_content du vendor doit être affiché dans notre block body #}
+{% block body %}
+    {% block fos_user_content %}{% endblock %}
+{% endblock %}
