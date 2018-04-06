@@ -32,6 +32,7 @@ framework:
         log: true
     templating:
         engines: ['twig']
+    serializer: { enable_annotations: true }
 
 # Twig Configuration
 twig:
@@ -75,3 +76,14 @@ fos_user:
     from_email:
         address: noreply@codeblog.com
         sender_name: Code Blog
+
+
+fos_rest:
+     view:
+         formats: { json: true, xml: false, rss: false }
+     serializer:
+         serialize_null: true
+     format_listener:
+         rules:
+             fallback_format: 'json'
+nelmio_api_doc: ~
