@@ -6,6 +6,9 @@ use AppBundle\Entity\Article;
 use AppBundle\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use FOS\UserBundle\Model\UserManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
@@ -13,8 +16,17 @@ use Symfony\Component\HttpFoundation\File\File;
  * Vous pouvez les charger en utilisant la console:
  *           bin/console doctrine:fixtures:load
  */
-final class AppFixtures extends Fixture
+class AppFixtures extends Fixture
 {
+    protected $FOSUserManager;
+    protected $filesystem;
+
+    public function __construct(UserManagerInterface $FOSUserManager, Filesystem $filesystem)
+    {
+        $this->FOSUserManager = $FOSUserManager;
+        $this->filesystem = $filesystem;
+    }
+
     public function load(ObjectManager $manager)
     {
         $categoryNames = ['PHP', 'Javascript', 'ReactJs', 'Java', 'Téléphonie'];
@@ -61,19 +73,42 @@ final class AppFixtures extends Fixture
         $manager->persist($article);
 
         $manager->flush();
+
+
+        // Create our user and set details
+        $user = $this->FOSUserManager->createUser();
+        $user->setUsername('user');
+        $user->setEmail('user@email.com');
+        $user->setPlainPassword('pass');
+        $user->setEnabled(true);
+        $user->setRoles(array('ROLE_USER'));
+
+        // Update the user
+        $this->FOSUserManager->updateUser($user);
+
+        // Create our user and set details
+        $admin = $this->FOSUserManager->createUser();
+        $admin->setUsername('admin');
+        $admin->setEmail('admin@email.com');
+        $admin->setPlainPassword('pass');
+        $admin->setEnabled(true);
+        $admin->setRoles(array('ROLE_ADMIN'));
+
+        // Update the user
+        $this->FOSUserManager->updateUser($admin);
+
+        $manager->flush();
     }
 
     private function getFile($sampleFilename)
     {
-        $file = new File(__DIR__ . '/images/' . $sampleFilename);
-        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-
         // moves the file to the directory where image are stored
-        $file->move(
-            __DIR__ . '/../../../web/uploads/article',
-            $fileName
+        $this->filesystem->copy(
+            __DIR__ . '/images/' . $sampleFilename,
+            __DIR__ . '/../../../web/uploads/article/'.$sampleFilename,
+            true
         );
-        return $fileName;
+        return $sampleFilename;
     }
 
 }

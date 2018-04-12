@@ -17,7 +17,7 @@ class BlogController extends Controller
     {
         $categories = $this->getDoctrine()
             ->getRepository(Category::class)
-            ->findAll()
+            ->getDisplayableCategories()
         ;
         $article = $this
             ->getDoctrine()
@@ -27,6 +27,21 @@ class BlogController extends Controller
         return $this->render('blog/homepage.html.twig', [
             'categories' => $categories,
             'article' => $article,
+        ]);
+    }
+
+
+    /**
+     * @Route("/contents", name="blog_contents")
+     */
+    public function listContentAction(Request $request)
+    {
+        $categories = [];
+        $articles = [];
+
+        return $this->render('blog/contents.html.twig', [
+            'categories' => $categories,
+            'articles' => $articles,
         ]);
     }
 }
