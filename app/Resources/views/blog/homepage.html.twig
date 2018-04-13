@@ -21,7 +21,9 @@
 {% block categories_widget %}
     {% for category in categories %}
         <div class="col-lg-6">
-            <a>{{ category.name }} ({{ category.articles|length }})</a>
+            {% if category.articles|length >= 1 %}
+            <a href="/ArticleCategory/{{ article.id}}">{{ category.name }} ({{ category.articles|length }})</a>
+            {% endif %}
         </div>
     {% endfor %}
 {% endblock %}

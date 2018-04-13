@@ -36,8 +36,15 @@ class BlogController extends Controller
      */
     public function listContentAction(Request $request)
     {
-        $categories = [];
-        $articles = [];
+        $categories = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->findAll()
+        ;
+
+        $articles = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->findAll()
+        ;
 
         return $this->render('blog/contents.html.twig', [
             'categories' => $categories,

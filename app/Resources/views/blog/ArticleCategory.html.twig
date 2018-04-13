@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{# categories \AppBundle\Entity\Category[] #}
+{# article \AppBundle\Entity\Article #}
+
+{% block body %}
+    {% for article in articles %}
+        <div class="card mb-4">
+            <img class="card-img-top" src="{{ asset('uploads/article/' ~ article.image) }}" alt="Card image cap">
+            <div class="card-body">
+                <h2 class="card-title">{{ article.title }}</h2>
+                <p class="card-text">{{ article.content }}</p>
+                <a href="#" class="btn btn-primary">Read More &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">
+                Posted on {{ article.category.name }} {{ article.createdAt|date('d/m/Y') }} by
+                <a href="#">Start Bootstrap</a>
+            </div>
+        </div>
+    {% else %}
+        Rien ici :(
+    {% endfor %}
+{% endblock %}
+
+
+{% block categories_widget %}
+    {% for category in categories %}
+        <div class="col-lg-6">
+            {%  if category.articles|length >= 1 %}
+                <a href="pageCategory.html.twig/category/{{ category.id }}">{{ category.name }} ({{ category.articles|length }})</a>
+            {% endif %}
+        </div>
+    {% else %}
+        Ici non plus :(
+    {% endfor %}
+{% endblock %}

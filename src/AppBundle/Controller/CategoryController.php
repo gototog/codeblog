@@ -6,7 +6,8 @@ use AppBundle\Entity\Category;
 use AppBundle\Form\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("category")
@@ -27,6 +28,7 @@ class CategoryController extends Controller
             'categories' => $categories,
         ));
     }
+
 
     /**
      * @Route("/new", name="category_new")
