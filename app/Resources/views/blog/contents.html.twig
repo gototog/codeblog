@@ -4,6 +4,7 @@
 
 {% block body %}
     {% for article in articles %}
+        {% if article.isActive == 1 %}
     <div class="card mb-4">
         <img class="card-img-top" src="{{ asset('uploads/article/' ~ article.image) }}" alt="Card image cap">
         <div class="card-body">
@@ -16,6 +17,7 @@
             <a href="#">Start Bootstrap</a>
         </div>
     </div>
+{% endif %}
     {% else %}
         Rien ici :(
     {% endfor %}
@@ -24,9 +26,11 @@
 
 {% block categories_widget %}
     {% for category in categories %}
+        {% if category.articles|length != 0 %}
         <div class="col-lg-6">
-            <a>{{ category.name }} ({{ category.articles|length }})</a>
+            <a href="/contents/{{ category.id }}">{{ category.name }} ({{ category.articles|length }})</a>
         </div>
+{% endif %}
     {% else %}
         Ici non plus :(
     {% endfor %}

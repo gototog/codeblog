@@ -36,12 +36,38 @@ class BlogController extends Controller
      */
     public function listContentAction(Request $request)
     {
-        $categories = [];
-        $articles = [];
+        $categories = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->getDisplayableCategories()
+        ;
+        $article = $this
+            ->getDoctrine()
+            ->getRepository(Article::class)
+            ->findAll();
 
         return $this->render('blog/contents.html.twig', [
             'categories' => $categories,
-            'articles' => $articles,
+            'articles' => $article,
+        ]);
+    }
+
+    /**
+     * @Route("/contents/{category_id}", name="byCategory")
+     */
+    public function getByCat($category_id)
+    {
+        $categories = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->getDisplayableCategories()
+        ;
+        $article = $this
+            ->getDoctrine()
+            ->getRepository(Article::class)
+            ->findBy(array('category' => $category_id));
+
+        return $this->render('blog/contents.html.twig', [
+            'categories' => $categories,
+            'articles' => $article,
         ]);
     }
 }

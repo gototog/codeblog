@@ -56,6 +56,12 @@ class Article
     /**
      * @return int
      */
+
+    /**
+     * @ORM\Column(name="isActive", type="boolean")
+     */
+    private $isActive;
+
     public function getId()
     {
         return $this->id;
@@ -149,6 +155,22 @@ class Article
     public function setImageFile($imageFile)
     {
         $this->imageFile = $imageFile;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
     }
 }
 
