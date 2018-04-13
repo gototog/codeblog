@@ -6,6 +6,7 @@ use AppBundle\Entity\Article;
 use AppBundle\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -27,7 +28,10 @@ class ArticleType extends AbstractType
             ->add('category', EntityType::class, [
                 'class'=> Category::class,
             ])
-            ->add('imageFile', FileType::class);
+            ->add('imageFile', FileType::class)
+            ->add('isActive', CheckboxType::class, array(
+                'label' => 'Active'
+            ));
         ;
     }
 

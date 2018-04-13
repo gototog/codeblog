@@ -20,8 +20,12 @@
 
 {% block categories_widget %}
     {% for category in categories %}
-        <div class="col-lg-6">
-            <a>{{ category.name }} ({{ category.articles|length }})</a>
-        </div>
+
+        {% if category.articles|length == 0 %}
+        {% else %}
+            <div class="col-lg-6">
+                <a href="{{ path('category_article_show', {'id': category.id } ) }}">{{ category.name }} ({{ category.articles|length }})</a>
+            </div>
+        {% endif %}
     {% endfor %}
 {% endblock %}

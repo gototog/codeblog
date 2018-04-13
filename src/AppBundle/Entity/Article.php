@@ -22,6 +22,13 @@ class Article
     private $id;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="isActive", type="boolean")
+     */
+    private $isActive;
+
+    /**
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
@@ -149,6 +156,22 @@ class Article
     public function setImageFile($imageFile)
     {
         $this->imageFile = $imageFile;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
     }
 }
 

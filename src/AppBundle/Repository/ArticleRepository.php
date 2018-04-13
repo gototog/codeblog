@@ -24,4 +24,19 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
             ->getSingleResult()
             ;
     }
+
+    public function findByCategory($id)
+    {
+        $qb = $this->createQueryBuilder('article');
+
+        $qb
+            ->where('article.category = :category_id')
+            ->setParameter('category_id', $id)
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

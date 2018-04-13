@@ -39,7 +39,6 @@ class ArticleController extends Controller
      *
      * @Route("/new", name="article_new")
      * @Method({"GET", "POST"})
-     *
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function newAction(Request $request)
@@ -97,6 +96,7 @@ class ArticleController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="article_edit")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function editAction(Request $request, Article $article)
     {
@@ -138,6 +138,7 @@ class ArticleController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="article_delete")
      * @Method("DELETE")
+     * @Security("has_role('ROLE_USER')")
      */
     public function deleteAction(Request $request, Article $article)
     {
