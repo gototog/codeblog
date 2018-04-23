@@ -37,3 +37,14 @@
         </li>
     </ul>
 {% endblock %}
+{% block categories_widget %}
+    {% for category in categories %}
+        <div class="col-lg-6">
+            {%  if category.articles|length >= 1 %}
+                <a href="../ArticleCategory/{{ category.id}}">{{ category.name }} ({{ category.articles|length }})</a>
+            {% endif %}
+        </div>
+    {% else %}
+        Ici non plus :(
+    {% endfor %}
+{% endblock %}

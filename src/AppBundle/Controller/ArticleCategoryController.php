@@ -32,7 +32,7 @@ class ArticleCategoryController extends Controller
         $category = $this
             ->getDoctrine()
             ->getRepository(Category::class)
-            ->find($id);
+            ->getDisplayableCategories();
 
         return $this->render('blog/ArticleCategory.html.twig', [
             'categories' => $category,

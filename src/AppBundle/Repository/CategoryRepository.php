@@ -16,8 +16,7 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
 

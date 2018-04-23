@@ -8,7 +8,7 @@
         <div class="card-body">
             <h2 class="card-title">{{ article.title }}</h2>
             <p class="card-text">{{ article.content }}</p>
-            <a href="#" class="btn btn-primary">Read More &rarr;</a>
+            <a href="{{ path('article_id', { 'id': article.id }) }}" class="btn btn-primary">Lire la suite &rarr;</a>
         </div>
         <div class="card-footer text-muted">
             Posted on {{ article.category.name }} {{ article.createdAt|date('d/m/Y') }} by
@@ -22,7 +22,7 @@
     {% for category in categories %}
         <div class="col-lg-6">
             {% if category.articles|length >= 1 %}
-            <a href="/ArticleCategory/{{ article.id}}">{{ category.name }} ({{ category.articles|length }})</a>
+            <a href="/ArticleCategory/{{ category.id}}">{{ category.name }} ({{ category.articles|length }})</a>
             {% endif %}
         </div>
     {% endfor %}

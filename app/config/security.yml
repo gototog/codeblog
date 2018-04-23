@@ -12,6 +12,10 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
+        our_db_provider:
+            entity:
+                class: App\Entity\User
+                property: username
         in_memory:
             memory:
                 users:
@@ -20,6 +24,8 @@ security:
         fosuser_provider:
             id: fos_user.user_provider.username
     encoders:
+        App\Entity\User:
+          algorithm: bcrypt
         Symfony\Component\Security\Core\User\User: plaintext
         FOS\UserBundle\Model\UserInterface: bcrypt
 

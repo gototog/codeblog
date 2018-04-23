@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>{% block title %}Cours Epsi -{% endblock %}</title>
+    <title>{% block title %}Blog -{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 
@@ -29,6 +29,7 @@
 
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
+            {%  block side_widget %}
             <!-- Search Widget -->
             <div class="card my-4">
                 <h5 class="card-header">Search</h5>
@@ -62,6 +63,7 @@
                     the new Bootstrap 4 card containers!
                 </div>
             </div>
+            {% endblock %}
         </div>
         <!-- /.row -->
     </div>

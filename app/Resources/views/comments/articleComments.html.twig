@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+{# categories \AppBundle\Entity\Category[] #}
+{# article \AppBundle\Entity\Article #}
+
+{% block body %}
+
+        <div class="card mb-4">
+            <img class="card-img-top" src="{{ asset('uploads/article/' ~ article.image) }}" alt="Card image cap">
+            <div class="card-body">
+                <h2 class="card-title">{{ article.title }}</h2>
+                <p class="card-text">{{ article.content }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                Posted on {{ article.category.name }} {{ article.createdAt|date('d/m/Y') }} by
+                <a href="#">Start Bootstrap</a>
+            </div>
+        </div>
+        <div class="card my-4">
+            <h5 class="card-header">Leave a Comment:</h5>
+            <div class="card-body">
+                <form method="get">
+                    <div class="form-group">
+                    {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                    <input type="submit" class="btn btn-primary" value="Commenter"/>
+                    {{ form_end(form) }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    <h2>{{ comments|length }} comments</h2>
+    {% for comment in comments %}
+    <!-- Comment -->
+    <div class="media col-md-12">
+
+        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+        <div class="media-body">
+            <div class="row">
+                <div class="col-8">
+                    <h5 class="mt-0">{{ comment.username }}</h5>
+                    {{ comment.content }}
+                </div>
+                <div class="col-4">
+                    {% if app.user.username == 'admin' %}
+                    <a class="btn btn-dark align-items-md-end" href="{{ path('comment_edit', { 'id': comment.id }) }}">Modifier</a>
+                    {% elseif comment.userId == app.user.id %}
+                    <input type="button" class="btn btn-dark align-items-md-end" value="Modifier">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+        <hr>
+    {% else %}
+        <p>Pas de commentaire</p>
+    {% endfor %}
+
+
+{% endblock %}
+
+
+{% block categories_widget %}
+    {% for category in categories %}
+        <div class="col-lg-6">
+            {%  if category.articles|length >= 1 %}
+                <a href="../ArticleCategory/{{ category.id}}">{{ category.name }} ({{ category.articles|length }})</a>
+            {% endif %}
+        </div>
+    {% else %}
+        Ici non plus :(
+    {% endfor %}
+{% endblock %}

@@ -21,16 +21,29 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb
             ->getQuery()
-            ->getSingleResult()
-            ;
+            ->getSingleResult();
     }
+
     public function getArticlesFromCategory($id){
         $qb = $this->createQueryBuilder('article');
 
         $qb
-            ->where('article.id', $id);
+            ->where('article.category = :category')
+            ->setParameter('category', $id);
 
         return $qb
-            ->getQuery();
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getArticle($id){
+        $qb = $this->createQueryBuilder('article');
+
+        $qb -> where('article.id = :id')
+            ->setParameter('id', $id);
+
+        return $qb
+            ->getQuery()
+            ->getSingleResult();
     }
 }

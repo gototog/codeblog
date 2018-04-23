@@ -28,12 +28,12 @@ class ArticleController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $articles = $em->getRepository('AppBundle:Article')->findAll();
-
+        $categories = $em->getRepository('AppBundle:Category')->findAll();
         return $this->render('article/index.html.twig', array(
             'articles' => $articles,
+            'categories' => $categories,
         ));
     }
-
 
 
     /**
@@ -43,6 +43,8 @@ class ArticleController extends Controller
      * @Method({"GET", "POST"})
      *
      * @Security("has_role('ROLE_ADMIN')")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -82,6 +84,8 @@ class ArticleController extends Controller
      *
      * @Route("/{id}", name="article_show")
      * @Method("GET")
+     * @param Article $article
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(Article $article)
     {
@@ -99,6 +103,9 @@ class ArticleController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="article_edit")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @param Article $article
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Request $request, Article $article)
     {
@@ -140,6 +147,9 @@ class ArticleController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="article_delete")
      * @Method("DELETE")
+     * @param Request $request
+     * @param Article $article
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, Article $article)
     {
@@ -170,4 +180,5 @@ class ArticleController extends Controller
             ->getForm()
         ;
     }
+
 }

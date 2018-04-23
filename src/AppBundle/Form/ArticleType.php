@@ -28,7 +28,6 @@ class ArticleType extends AbstractType
                 'class'=> Category::class,
             ])
             ->add('imageFile', FileType::class);
-        ;
     }
 
     /**

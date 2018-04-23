@@ -22,7 +22,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('category_index') }}">Catégories</a>
                 </li>
-                {# IS_AUTHENTICATED_FULLY est un ROLE que l'on a lorsqu'on est connecté, peut importe le role user/admin #}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('comment_index') }}">Commentaires</a>
+                </li>
+                {# IS_AUTHENTICATED_FULLY est un ROLE que l'on a lorsqu'on est connecté, peu importe le role user/admin #}
                 {% if is_granted('ROLE_USER') %}
                     <li class="nav-item">
                          <a class="nav-link" href="{{ path('fos_user_security_logout') }}">logout ({{ app.user.username }})</a>

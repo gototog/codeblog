@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Comments list</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Content</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if app.user.username == 'admin' %}
+        <p>Je suis admin alors je vois les commentaires de tous les utilisateurs</p>
+        {% else %}
+        <p>Je suis un utilisateur lambda, alors je vois que mes commentaires</p>
+        {% endif %}
+        {% for comment in comments %}
+            <tr>
+                <td><a href="{{ path('comment_show', { 'id': comment.id }) }}">{{ comment.id }}</a></td>
+                <td>{{ comment.username }}</td>
+                <td>{{ comment.content }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('comment_show', { 'id': comment.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('comment_edit', { 'id': comment.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+{% block categories_widget %}
+    {% for category in categories %}
+        <div class="col-lg-6">
+            {%  if category.articles|length >= 1 %}
+                <a href="../ArticleCategory/{{ category.id}}">{{ category.name }} ({{ category.articles|length }})</a>
+            {% endif %}
+        </div>
+    {% else %}
+        Ici non plus :(
+    {% endfor %}
+{% endblock %}
