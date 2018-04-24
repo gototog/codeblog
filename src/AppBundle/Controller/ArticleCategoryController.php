@@ -21,7 +21,7 @@ class ArticleCategoryController extends Controller
 
     /**
      *
-     * @Route("/ArticleCategory/{id}")
+     * @Route("/ArticleCategory/{id}", name="article_category")
      */
     public function showArticlesFromCategory($id){
         $article = $this
