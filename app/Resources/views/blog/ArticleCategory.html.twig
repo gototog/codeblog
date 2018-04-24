@@ -9,7 +9,7 @@
             <div class="card-body">
                 <h2 class="card-title">{{ article.title }}</h2>
                 <p class="card-text">{{ article.content }}</p>
-                <a href="/commentaires/{{ article.id }}" class="btn btn-primary">Lire la suite &rarr;</a>
+                <a href="{{ path('article_id', {'id': article.id}) }}" class="btn btn-primary">Lire la suite &rarr;</a>
             </div>
             <div class="card-footer text-muted">
                 Posted on {{ article.category.name }} {{ article.createdAt|date('d/m/Y') }} by
